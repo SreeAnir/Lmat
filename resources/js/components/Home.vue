@@ -1,10 +1,19 @@
 <!-- About.vue -->
 <template>
-  <div>
-
-    <h1>Home Page</h1>
-    <p>This is the about page content.</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-5">
+        <div class="card">
+          <div class="card-header">
+            Home Page
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Welcome to Matri</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <router-view></router-view>
-
 </template>

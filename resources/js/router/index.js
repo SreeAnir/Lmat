@@ -5,7 +5,7 @@ import Home from '../components/Home.vue';
 const routes = [
     {
         path: '/',
-        redirect: '/about' // Redirect root path to '/about'
+        redirect: '/home' // Redirect root path to '/about'
     },
     {
         path: '/home',

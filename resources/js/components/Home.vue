@@ -1,19 +1,19 @@
-<!-- About.vue -->
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 mt-5">
-        <div class="card">
-          <div class="card-header">
-            Home Page
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Welcome to Matri</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5">
+                <div class="card">
+
+                    <div class="card-header">
+                        Homepage
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">Welcome to the Laravel 10 and Vuejs App Homepage.</p>
+                    </div>
+
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>

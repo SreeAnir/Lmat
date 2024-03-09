@@ -1,65 +1,81 @@
- 
-<!-- App.vue -->
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Your Logo</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/home">Home</router-link> 
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
-          </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/login">Login</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/register">Register</router-link>
-        </li>
-      </ul>
+    <div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Auth App</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <router-link to="/" class="nav-link" aria-current="page">Home</router-link>
+                        </li>
 
-      </div>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <router-link v-if="isAuthenticated" to="/dashboard" class="btn btn-outline-success">Dashboard</router-link> &nbsp;
+                        <a v-if="isAuthenticated" @click="logout" class="btn btn-outline-danger">Logout</a> &nbsp;
+                        <router-link v-if="!isAuthenticated" to="/login" class="btn btn-outline-primary">Login</router-link> &nbsp;
+                        <router-link v-if="!isAuthenticated" to="/register" class="btn btn-outline-primary">Register</router-link>
+                    </form>
+                </div>
+            </div>
+        </nav>
     </div>
-  </nav>
-<!-- 
-  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar w/ text</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">    <router-link to="/home">Home</router-link> </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"> <router-link to="/about">About</router-link></a>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          Navbar text with an inline element
-        </span>
-      </div>
-    </div>
-  </nav> -->
-     <router-view></router-view>
- </template>
- 
- <script>
- export default {
-   name: 'App'
- }
- </script>
- 
+
+    <router-view></router-view>
+
+</template>
+
+<script>
+
+import { mapGetters } from 'vuex';
+import axios from '../axios.js'
+
+
+export default {
+
+    computed: {
+
+        isAuthenticated() {
+            return this.$store.state.isAuthenticated
+            // return this.$store.getters.authStatus
+        },
+
+        authToken() {
+            return this.$store.state.token
+        }
+
+        // ...mapGetters({
+        //     isAuthenticated: 'authStatus'
+        // })
+
+    },
+
+    mounted() {
+        this.$store.dispatch('checkUserAuthenticationStatus')
+    },
+
+    methods: {
+
+        logout() {
+            axios.post('api/logout')
+                .then(response => {
+
+                    this.$store.dispatch('logout')
+
+                    this.$router.push({
+                        name: 'login'
+                    })
+
+                 })
+                .catch(error => {
+                 })
+        }
+
+    }
+
+}
+
+</script>

@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('{any}', function () {
-//     return view('app');
-// })->where('any','.*');
-Route::get('/{any}', function () {
-    return view('app'); // Assuming 'app' is the name of your main HTML file
+Route::get('{any?}', function () {
+    return view('app');
 })->where('any', '.*');
